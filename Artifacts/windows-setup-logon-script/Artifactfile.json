@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2015-01-01/dtlArtifacts.json",
+  "title": "Setup Logon Script",
+  "description": "This artifact creates a task that will run when a user logs into a windows machine",
+  "tags": [
+    "Powershell",
+    "Task Scheduler"
+  ],
+  "iconUri": "",
+  "targetOsType": "Windows",
+  "parameters": {
+    "taskAction": {
+      "type": "string",
+      "displayName": "Task Action",
+      "description": "Action that the task should take"
+    },
+    "taskName": {
+      "type": "string",
+      "displayName": "Task Name",
+      "description": "Name of the scheduled task to be created"
+    }
+  },
+  "runCommand": {
+    "commandToExecute": "[concat('powershell.exe -executionpolicy bypass -File createLogonTrigger.ps1', ' -Name ', parameters('taskName'), ' -Action ', parameters('taskAction'))]"
+  }
+}
